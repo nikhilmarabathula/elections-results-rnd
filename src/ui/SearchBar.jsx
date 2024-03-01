@@ -27,7 +27,8 @@ const Container = styled.div`
   top: calc(100%);
   left: 0;
   width: 100%;
-  padding-bottom: var(--border-radius-xl);
+  height: ${({ hasFilteredItems }) => (hasFilteredItems ? "auto" : "0")};
+  overflow: hidden;
   border: 1px solid var(--color-grey-300) !important;
   border-top: 1px solid var(--color-grey-300) !important;
   border-bottom-left-radius: var(--border-radius-xl);
@@ -51,7 +52,7 @@ const StyledSearchBarResultItem = styled.li`
   display: flex;
   align-items: center;
   padding-left: 2%;
-  border-bottom: 1px solid var(--color-grey-300) !important;
+  /* border-bottom: 1px solid var(--color-grey-300) !important; */
 
   &:hover {
     background-color: #f0f8ff; /* Light blue color */
@@ -82,8 +83,8 @@ function SearchBar() {
         onBlur={() => setIsFocused(false)}
         onChange={(e) => setSearchValue(Number(e.target.value))}
       />
-      {isFocused && filteredItems.length > 0 && (
-        <Container>
+      {isFocused && (
+        <Container hasFilteredItems={filteredItems.length > 0}>
           <ul>
             {filteredItems.map((item) => (
               <SearchBarResultItem value={item} key={item} />
