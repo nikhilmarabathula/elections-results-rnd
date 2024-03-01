@@ -9,15 +9,23 @@ const HeaderContainer = styled.header`
   width: 100%;
   background-color: white;
   display: flex;
+  border-bottom: 1px solid var(--color-grey-100);
 `;
 
 const StyledInput = styled.input`
   border: 1px solid var(--color-grey-300);
-  background-color: var(--color-grey-0);
-  border-radius: var(--border-radius-sm);
+  background-color: var(--color-grey-100);
+  border-radius: var(--border-radius-xl);
   padding: 0.8rem 1.2rem;
   box-shadow: var(--shadow-sm);
   min-width: 80%;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-grey-300);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-grey-0);
+  }
 `;
 
 const Header = () => {
