@@ -1,21 +1,14 @@
 import styled from "styled-components";
+
+import HeaderDiv from "./HeaderDiv";
 import Logo from "./Logo";
+import Button from "./Button";
 
-const StyledHeader = styled.header`
+const HeaderContainer = styled.header`
+  height: 64px;
+  width: 100%;
+  background-color: white;
   display: flex;
-  justify-content: flex-start;
-  position: relative;
-  padding: 1rem 1rem;
-  height: 4rem;
-  background-color: var(--color-grey-100);
-
-  @media (min-width: 992px) {
-    height: 5rem;
-  }
-
-  @media (min-width: 1180px) {
-    height: 6.4rem;
-  }
 `;
 
 const StyledInput = styled.input`
@@ -24,26 +17,23 @@ const StyledInput = styled.input`
   border-radius: var(--border-radius-sm);
   padding: 0.8rem 1.2rem;
   box-shadow: var(--shadow-sm);
-  max-width: 20rem;
-  font-size: 1rem;
-
-  flex: 0 1 auto;
-  margin-left: auto;
-
-  @media (min-width: 992px) {
-    min-width: 35rem;
-    display: block;
-    font-size: 1.8rem;
-  }
+  min-width: 80%;
 `;
 
-function Header() {
+const Header = () => {
   return (
-    <StyledHeader>
-      <Logo />
-      {<StyledInput type="searchbar" placeholder="Search for your assembly" />}
-    </StyledHeader>
+    <HeaderContainer>
+      <HeaderDiv>
+        <Logo />
+      </HeaderDiv>
+      <HeaderDiv>
+        <StyledInput type="searchbar" placeholder="Search for your assembly" />
+      </HeaderDiv>
+      <HeaderDiv>
+        <Button variation="primary">Login</Button>
+      </HeaderDiv>
+    </HeaderContainer>
   );
-}
+};
 
 export default Header;
