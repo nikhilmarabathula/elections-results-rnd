@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import SearchBarContainer from "./SearchBarContainer";
 
 const StyledInput = styled.input`
   border: 1px solid var(--color-grey-300);
@@ -22,20 +23,6 @@ const StyledInput = styled.input`
   }
 `;
 
-const Container = styled.div`
-  position: absolute;
-  top: calc(100%);
-  left: 0;
-  width: 100%;
-  height: "auto"; // Example fallback height
-  overflow: hidden;
-  border: 1px solid var(--color-grey-300) !important;
-  border-top: 1px solid var(--color-grey-300) !important;
-  border-bottom-left-radius: var(--border-radius-xl);
-  border-bottom-right-radius: var(--border-radius-xl);
-  z-index: 1;
-`;
-
 const SearchBarDiv = styled.div`
   position: relative;
   width: 80%;
@@ -45,38 +32,10 @@ const SearchBarDiv = styled.div`
   align-items: center;
 `;
 
-const StyledSearchBarResultItem = styled.li`
-  height: 5rem;
-  background-color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  padding-left: 2%;
-
-  &:hover {
-    background-color: #f0f8ff; /* Light blue color */
-    cursor: pointer;
-  }
-`;
-
-// eslint-disable-next-line react/prop-types
-const SearchBarResultItem = ({ value }) => {
-  return <StyledSearchBarResultItem>{value}</StyledSearchBarResultItem>;
-};
-
-const StyledSearchResultMessage = styled.span`
-  height: 5rem;
-  background-color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  padding-left: 2%;
-`;
-
 function SearchBar() {
   const [searchValue, setSearchValue] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const items = ["12", "13"];
+  const items = ["12", "13", "14", "15", "16", "17"];
 
   const filteredItems = searchValue
     ? items.filter((item) => item.includes(searchValue))
@@ -93,28 +52,10 @@ function SearchBar() {
       />
 
       {isFocused && (
-        <Container>
-          {filteredItems.length > 0 ? (
-            <>
-              <ul>
-                {filteredItems.map((item) => (
-                  <SearchBarResultItem value={item} key={item} />
-                ))}
-              </ul>
-              <StyledSearchResultMessage>
-                Found {filteredItems.length} result
-                {filteredItems.length !== 1 ? "s" : ""}
-              </StyledSearchResultMessage>
-            </>
-          ) : (
-            searchValue &&
-            searchValue.length > 0 && (
-              <StyledSearchResultMessage>
-                No results found
-              </StyledSearchResultMessage>
-            )
-          )}
-        </Container>
+        <SearchBarContainer
+          filteredItems={filteredItems}
+          searchValue={searchValue}
+        />
       )}
     </SearchBarDiv>
   );
