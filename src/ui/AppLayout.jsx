@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import styled from "styled-components";
 
@@ -7,6 +8,10 @@ function AppLayout() {
   return (
     <StyledAppLayout>
       <Header />
+
+      <main>
+        <Outlet />
+      </main>
     </StyledAppLayout>
   );
 }
