@@ -27,7 +27,7 @@ const Container = styled.div`
   top: calc(100%);
   left: 0;
   width: 100%;
-  height: ${({ hasFilteredItems }) => (hasFilteredItems ? "auto" : "0")};
+  height: ${({ hasFilteredItems }) => (hasFilteredItems ? "auto" : "100")};
   overflow: hidden;
   border: 1px solid var(--color-grey-300) !important;
   border-top: 1px solid var(--color-grey-300) !important;
@@ -65,10 +65,19 @@ const SearchBarResultItem = ({ value }) => {
   return <StyledSearchBarResultItem>{value}</StyledSearchBarResultItem>;
 };
 
+const StyledSearchResultMessage = styled.span`
+  height: 5rem;
+  background-color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding-left: 2%;
+`;
+
 function SearchBar() {
   const [searchValue, setSearchValue] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const items = [1, 1, 3, 1, 5, 6, 7, 8];
+  const items = ["1", "1"];
 
   const filteredItems = searchValue
     ? items.filter((item) => item === searchValue)
@@ -81,15 +90,31 @@ function SearchBar() {
         placeholder="Search for your assembly"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        onChange={(e) => setSearchValue(Number(e.target.value))}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
+
       {isFocused && (
         <Container hasFilteredItems={filteredItems.length > 0}>
-          <ul>
-            {filteredItems.map((item) => (
-              <SearchBarResultItem value={item} key={item} />
-            ))}
-          </ul>
+          {filteredItems.length > 0 ? (
+            <>
+              <ul>
+                {filteredItems.map((item) => (
+                  <SearchBarResultItem value={item} key={item} />
+                ))}
+              </ul>
+              <StyledSearchResultMessage>
+                Found {filteredItems.length} result
+                {filteredItems.length !== 1 ? "s" : ""}
+              </StyledSearchResultMessage>
+            </>
+          ) : (
+            searchValue &&
+            searchValue.length > 0 && (
+              <StyledSearchResultMessage>
+                No results found
+              </StyledSearchResultMessage>
+            )
+          )}
         </Container>
       )}
     </SearchBarDiv>
