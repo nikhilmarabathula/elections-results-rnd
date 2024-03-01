@@ -27,7 +27,7 @@ const Container = styled.div`
   top: calc(100%);
   left: 0;
   width: 100%;
-  height: ${({ hasFilteredItems }) => (hasFilteredItems ? "auto" : "100")};
+  height: "auto"; // Example fallback height
   overflow: hidden;
   border: 1px solid var(--color-grey-300) !important;
   border-top: 1px solid var(--color-grey-300) !important;
@@ -52,7 +52,6 @@ const StyledSearchBarResultItem = styled.li`
   display: flex;
   align-items: center;
   padding-left: 2%;
-  /* border-bottom: 1px solid var(--color-grey-300) !important; */
 
   &:hover {
     background-color: #f0f8ff; /* Light blue color */
@@ -77,10 +76,10 @@ const StyledSearchResultMessage = styled.span`
 function SearchBar() {
   const [searchValue, setSearchValue] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const items = ["1", "1"];
+  const items = ["12", "13"];
 
   const filteredItems = searchValue
-    ? items.filter((item) => item === searchValue)
+    ? items.filter((item) => item.includes(searchValue))
     : [];
 
   return (
@@ -94,7 +93,7 @@ function SearchBar() {
       />
 
       {isFocused && (
-        <Container hasFilteredItems={filteredItems.length > 0}>
+        <Container>
           {filteredItems.length > 0 ? (
             <>
               <ul>
