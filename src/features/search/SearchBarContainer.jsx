@@ -14,7 +14,7 @@ const Container = styled.div`
   border-top: 1px solid var(--color-grey-300) !important;
   border-bottom-left-radius: var(--border-radius-xl);
   border-bottom-right-radius: var(--border-radius-xl);
-  z-index: 1;
+  /* z-index: 1; */
 `;
 
 const StyledSearchResultMessage = styled.span`
@@ -26,14 +26,21 @@ const StyledSearchResultMessage = styled.span`
   padding-left: 2%;
 `;
 
-function SearchBarContainer({ filteredItems, searchValue }) {
+function SearchBarContainer({ filteredItems, searchValue, onItemSelected }) {
   return (
-    <Container>
+    <Container
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={(e) => e.stopPropagation()}
+    >
       {filteredItems.length > 0 ? (
         <>
           <ul>
             {filteredItems.map((item) => (
-              <SearchBarResultItem value={item.name} key={item.id} />
+              <SearchBarResultItem
+                value={item}
+                key={item.id}
+                onItemSelected={onItemSelected}
+              />
             ))}
           </ul>
           <StyledSearchResultMessage>
@@ -56,6 +63,7 @@ function SearchBarContainer({ filteredItems, searchValue }) {
 SearchBarContainer.propTypes = {
   filteredItems: PropTypes.array,
   searchValue: PropTypes.string,
+  onItemSelected: PropTypes.func,
 };
 
 export default SearchBarContainer;

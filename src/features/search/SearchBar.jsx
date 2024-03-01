@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import SearchBarContainer from "./SearchBarContainer";
 import useSearch from "../../hooks/useSearch";
+import { useSelector } from "react-redux";
 
 const StyledInput = styled.input`
   border: 1px solid var(--color-grey-300);
@@ -35,15 +36,27 @@ const SearchBarDiv = styled.div`
 
 function SearchBar() {
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef(null);
   const { searchValue, setSearchValue, filteredResults } = useSearch();
+  const selectedAssembly = useSelector((state) => state);
+
+  function handleItemSelected() {
+    setIsFocused(false);
+    setSearchValue("");
+    console.log(selectedAssembly);
+  }
 
   return (
     <SearchBarDiv>
       <StyledInput
+        ref={inputRef}
         type="searchbar"
         placeholder="Search for your assembly"
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={() => {
+          setIsFocused(false);
+        }}
+        value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
 
@@ -51,6 +64,7 @@ function SearchBar() {
         <SearchBarContainer
           filteredItems={filteredResults}
           searchValue={searchValue}
+          onItemSelected={handleItemSelected}
         />
       )}
     </SearchBarDiv>
