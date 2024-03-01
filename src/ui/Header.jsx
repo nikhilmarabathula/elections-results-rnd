@@ -99,13 +99,12 @@ const Header = () => {
             onBlur={() => setIsFocused(false)}
             onChange={(e) => setSearchValue(Number(e.target.value))}
           />
-          {isFocused && (
+          {isFocused && filteredItems.length > 0 && (
             <Container>
               <ul>
-                {searchValue &&
-                  filteredItems.map((item) => (
-                    <SearchBarResultItem value={item} key={item} />
-                  ))}
+                {filteredItems.map((item) => (
+                  <SearchBarResultItem value={item} key={item} />
+                ))}
               </ul>
             </Container>
           )}
