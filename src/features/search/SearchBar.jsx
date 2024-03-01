@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import SearchBarContainer from "./SearchBarContainer";
+import useSearch from "../../hooks/useSearch";
 
 const StyledInput = styled.input`
   border: 1px solid var(--color-grey-300);
@@ -33,13 +34,8 @@ const SearchBarDiv = styled.div`
 `;
 
 function SearchBar() {
-  const [searchValue, setSearchValue] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const items = ["12", "13", "14", "15", "16", "17"];
-
-  const filteredItems = searchValue
-    ? items.filter((item) => item.includes(searchValue))
-    : [];
+  const { searchValue, setSearchValue, filteredResults } = useSearch();
 
   return (
     <SearchBarDiv>
@@ -53,7 +49,7 @@ function SearchBar() {
 
       {isFocused && (
         <SearchBarContainer
-          filteredItems={filteredItems}
+          filteredItems={filteredResults}
           searchValue={searchValue}
         />
       )}

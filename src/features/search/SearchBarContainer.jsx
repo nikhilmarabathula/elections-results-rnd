@@ -33,7 +33,7 @@ function SearchBarContainer({ filteredItems, searchValue }) {
         <>
           <ul>
             {filteredItems.map((item) => (
-              <SearchBarResultItem value={item} key={item} />
+              <SearchBarResultItem value={item.name} key={item.id} />
             ))}
           </ul>
           <StyledSearchResultMessage>
@@ -54,7 +54,7 @@ function SearchBarContainer({ filteredItems, searchValue }) {
 }
 
 SearchBarContainer.propTypes = {
-  filteredItems: PropTypes.object,
+  filteredItems: PropTypes.array,
   searchValue: PropTypes.string,
 };
 
