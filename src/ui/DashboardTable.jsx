@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const TableContainer = styled.div`
   width: 80%;
-  /* height: 100%; Set the max height for the table container */
-  overflow-y: auto; /* Enable vertical scroll if content exceeds max height */
+  overflow-y: auto;
 `;
 
 const StyledTable = styled.table`
