@@ -1,33 +1,13 @@
 import styled from "styled-components";
 
-import HeaderDiv from "./HeaderDiv";
-import Logo from "./Logo";
-import Login from "./Login";
-import SearchBar from "../features/search/SearchBar";
-
-const HeaderContainer = styled.header`
-  height: 64px;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--color-grey-300);
+const StyledHeader = styled.header`
+  background-color: var(--color-grey-0);
+  padding: 1.2rem 4.8rem;
+  border-bottom: 1px solid var(--color-grey-100);
 `;
 
-const Header = () => {
-  return (
-    <HeaderContainer>
-      <HeaderDiv>
-        <Logo />
-      </HeaderDiv>
-      <HeaderDiv>
-        <SearchBar />
-      </HeaderDiv>
-      <HeaderDiv>
-        <Login />
-      </HeaderDiv>
-    </HeaderContainer>
-  );
-};
+function Header() {
+  return <StyledHeader>HEADER</StyledHeader>;
+}
 
 export default Header;
