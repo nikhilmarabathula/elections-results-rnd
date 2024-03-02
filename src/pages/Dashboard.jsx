@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DashboardTable from "../ui/DashboardTable";
+import DashboardTable from "../features/dashboard/DashboardTable";
 import FiltersLayout from "../ui/FiltersLayout";
 import React from "react";
 

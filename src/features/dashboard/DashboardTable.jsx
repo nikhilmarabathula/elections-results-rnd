@@ -1,64 +1,88 @@
-import { useQuery } from "@tanstack/react-query";
+import { useTable } from "react-table";
 import styled from "styled-components";
 
-import { getCabins } from "../../services/apiCabins";
-import Spinner from "../../ui/Spinner";
+const TableContainer = styled.div`
+  width: 80%;
+  overflow-y: auto;
 
-const Table = styled.div`
-  border: 1px solid var(--color-grey-200);
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
 
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
+  /* &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  } */
+`;
+
+const StyledTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
   overflow: hidden;
 `;
 
-const TableHeader = styled.header`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-
-  background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  padding: 1.6rem 2.4rem;
+const StyledTh = styled.th`
+  padding: 16px;
+  text-align: left;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #ddd;
 `;
 
-function DashboardTable() {
-  const {
-    isLoading,
-    data: cabins,
-    error,
-  } = useQuery({
-    queryKey: ["cabins"],
-    queryFn: getCabins,
-  });
+const StyledTd = styled.td`
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+`;
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+const StyledTableBody = styled.tbody``;
+
+const DashboardTable = ({ columns, data }) => {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data });
 
   return (
-    <Table role="table">
-      <TableHeader role="row">
-        <div></div>
-        <div>Party</div>
-        <div>Candidate</div>
-        <div>Votes</div>
-        <div>Vote Share</div>
-        <div></div>
-      </TableHeader>
-      {
-        //   cabins.map((cabin) => (
-        //   <CabinRow cabin={cabin} key={cabin.id} />
-        // ))
-      }
-    </Table>
+    <TableContainer>
+      <StyledTable {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+              {headerGroup.headers.map((column) => (
+                <StyledTh {...column.getHeaderProps()} key={column.id}>
+                  {column.render("Header")}
+                </StyledTh>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <StyledTableBody {...getTableBodyProps()}>
+          {rows.map((row, rowIndex) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} key={rowIndex}>
+                {row.cells.map((cell, cellIndex) => {
+                  return (
+                    <StyledTd {...cell.getCellProps()} key={cellIndex}>
+                      {cell.render("Cell")}
+                    </StyledTd>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </StyledTableBody>
+      </StyledTable>
+    </TableContainer>
   );
-}
+};
 
 export default DashboardTable;
