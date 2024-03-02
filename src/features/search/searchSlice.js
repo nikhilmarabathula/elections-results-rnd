@@ -10,7 +10,6 @@ const searchSlice = createSlice({
   reducers: {
     setSelectedResult(state, action) {
       state.selectedResult = action.payload;
-      console.log(state);
     },
 
     // eslint-disable-next-line no-unused-vars

@@ -44,6 +44,7 @@ function SearchBar() {
     setIsFocused(false);
     setSearchValue("");
     console.log(selectedAssembly);
+    inputRef.current.blur();
   }
 
   return (
