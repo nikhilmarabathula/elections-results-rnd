@@ -4,6 +4,24 @@ import styled from "styled-components";
 const TableContainer = styled.div`
   width: 80%;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  } */
 `;
 
 const StyledTable = styled.table`
