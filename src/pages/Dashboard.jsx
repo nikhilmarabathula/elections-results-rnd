@@ -6,9 +6,11 @@ import React from "react";
 const StyledMain = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 90vh;
+  /* background-color: orange; */
   padding: 2rem;
   padding-bottom: 5rem;
+  /* opacity: 0.1; */
 `;
 
 function Dashboard() {
@@ -186,8 +188,10 @@ function Dashboard() {
 
   return (
     <StyledMain>
-      <DashboardTable data={data} columns={columns} />
-      <FiltersLayout />
+      {
+        // <DashboardTable data={data} columns={columns} />
+        // <FiltersLayout />
+      }
     </StyledMain>
   );
 }

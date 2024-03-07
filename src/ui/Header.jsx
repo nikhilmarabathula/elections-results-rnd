@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import SearchBar from "../features/search/SearchBar";
+
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
   padding: 1.2rem 4.8rem;
@@ -7,7 +9,11 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  return <StyledHeader>HEADER</StyledHeader>;
+  return (
+    <StyledHeader>
+      <SearchBar />
+    </StyledHeader>
+  );
 }
 
 export default Header;

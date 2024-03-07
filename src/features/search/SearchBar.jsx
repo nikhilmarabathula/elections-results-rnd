@@ -27,7 +27,7 @@ const StyledInput = styled.input`
 
 const SearchBarDiv = styled.div`
   position: relative;
-  width: 80%;
+  width: 20%;
   height: 100%;
   display: flex;
   justify-content: center;
