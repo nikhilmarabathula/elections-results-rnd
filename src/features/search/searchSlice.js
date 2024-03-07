@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedResult: null,
+  selectedSegmentValue: "Bhimavaram",
+  defaultSegmentCategory: "Assembly",
 };
 
 const searchSlice = createSlice({
@@ -9,12 +10,12 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setSelectedResult(state, action) {
-      state.selectedResult = action.payload;
+      state.selectedSegmentValue = action.payload;
     },
 
     // eslint-disable-next-line no-unused-vars
     resetSelectedResult(state, action) {
-      state.selectedResult = null;
+      state.selectedSegmentValue = null;
     },
   },
 });

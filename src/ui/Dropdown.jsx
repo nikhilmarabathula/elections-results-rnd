@@ -47,13 +47,14 @@ const Option = styled.div`
 `;
 
 // Dropdown component
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, onSelect, defaultValue }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(defaultValue);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onSelect(option);
   };
 
   return (

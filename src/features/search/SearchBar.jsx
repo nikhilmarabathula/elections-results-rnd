@@ -34,7 +34,7 @@ const SearchBarDiv = styled.div`
   align-items: center;
 `;
 
-function SearchBar() {
+function SearchBar({ searchBarPlaceHolder }) {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
   const { searchValue, setSearchValue, filteredResults } = useSearch();
@@ -52,7 +52,7 @@ function SearchBar() {
       <StyledInput
         ref={inputRef}
         type="searchbar"
-        placeholder="Search for your assembly"
+        placeholder={searchBarPlaceHolder}
         onFocus={() => setIsFocused(true)}
         onBlur={() => {
           setIsFocused(false);
