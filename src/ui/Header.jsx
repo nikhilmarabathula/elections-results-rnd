@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedResult } from "../features/search/searchSlice";
+import { setSegmentCategory } from "../features/search/searchSlice";
 
 import SearchBar from "../features/search/SearchBar";
 import Dropdown from "./Dropdown";
@@ -19,33 +19,17 @@ const segmentOptions = ["Assembly", "Parliament", "District", "Mandal"];
 
 function Header() {
   const defaultSegmentValue = useSelector(
-    (state) => state.searchResults.defaultSegmentCategory
+    (state) => state.searchResults.segmentCategory
   );
   const selectedSegmentValue = useSelector(
-    (state) => state.searchResults.selectedSegmentValue
+    (state) => state.searchResults.segmentValue
   );
   const [selectedValue, setSelectedValue] = useState(defaultSegmentValue);
   const dispatch = useDispatch();
 
   const handleSelect = (value) => {
     setSelectedValue(value);
-    const valueToBePlaced = getValueToBePlaced(value);
-    dispatch(setSelectedResult(valueToBePlaced));
-  };
-
-  const getValueToBePlaced = (value) => {
-    switch (value) {
-      case "Assembly":
-        return "Bhimavaram";
-      case "Parliament":
-        return "Narsapuram";
-      case "District":
-        return "West Godavari";
-      case "Mandal":
-        return "Veeravasaram";
-      default:
-        return "Bhimavaram";
-    }
+    dispatch(setSegmentCategory(value));
   };
 
   const searchBarPlaceHolder = `Search for your ${selectedValue}`;
@@ -58,7 +42,7 @@ function Header() {
         defaultValue={defaultSegmentValue}
       />
       <SearchBar searchBarPlaceHolder={searchBarPlaceHolder} />
-      <span>{selectedSegmentValue ?? "Test"}</span>
+      <span>{selectedSegmentValue}</span>
     </StyledHeader>
   );
 }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
-import { setSelectedResult } from "./searchSlice";
+import { setSegmentValue } from "./searchSlice";
 
 const StyledSearchBarResultItem = styled.li`
   height: 5rem;
@@ -27,7 +27,7 @@ function SearchBarResultItem({ value, onItemSelected }) {
   const dispatch = useDispatch();
 
   function handleSelectedData(e) {
-    dispatch(setSelectedResult(value.name));
+    dispatch(setSegmentValue(value.name));
     onItemSelected();
   }
 
