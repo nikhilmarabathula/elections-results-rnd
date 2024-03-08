@@ -1,31 +1,39 @@
 import { useEffect, useState } from "react";
 import { getSearchResults } from "../services/apiSearchResults";
+import { useSelector } from "react-redux";
 
 const useSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
-  const [assembliesData, setAssembliesData] = useState([]);
+  const [segmentsData, setSegmentsData] = useState([]);
 
-  useEffect(function () {
-    async function fetchSearchResults() {
-      const results = await getSearchResults();
-      setAssembliesData(results);
-    }
-    fetchSearchResults();
-  }, []);
+  const searchCategory = useSelector(
+    (state) => state.searchResults.segmentCategory
+  );
+
+  useEffect(
+    function () {
+      async function fetchSearchResults() {
+        const results = await getSearchResults(searchCategory);
+        setSegmentsData(results);
+      }
+      fetchSearchResults();
+    },
+    [searchCategory]
+  );
 
   useEffect(
     function () {
       if (searchValue === "") {
         setFilteredResults([]);
       } else {
-        let filteredResultsTemp = assembliesData.filter((assemblyData) =>
-          assemblyData.name.toLowerCase().startsWith(searchValue.toLowerCase())
+        let filteredResultsTemp = segmentsData.filter((segmentData) =>
+          segmentData.name.toLowerCase().startsWith(searchValue.toLowerCase())
         );
         setFilteredResults(filteredResultsTemp);
       }
     },
-    [assembliesData, searchValue]
+    [segmentsData, searchValue]
   );
 
   return {
